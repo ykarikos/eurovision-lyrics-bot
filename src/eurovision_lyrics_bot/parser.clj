@@ -1,13 +1,17 @@
 (ns eurovision-lyrics-bot.parser)
 
+(defmacro traverse [content & path]
+  (let [nth-ops (map #(list 'nth %) path)]
+    (cons '-> (cons content nth-ops))))
+
 (defn parse-song
   [html]
-  (let [content (-> html (nth 3) (nth 2) (nth 6))
-        header (-> content (nth 3) (nth 2) (nth 2) (nth 3) (nth 2) (nth 2) (nth 2) (nth 2) (nth 2))
-        country (-> header (nth 4) (nth 2))
-        year (-> header (nth 2) (nth 2))
-        lyrics-table (-> content (nth 7) (nth 2))
-        title (-> lyrics-table (nth 2) (nth 2) (nth 2) (nth 2))]
+  (let [content (traverse html 3 2 6)
+        header (traverse content 3 2 2 3 2 2 2 2 2)
+        country (traverse header 4 2)
+        year (traverse header 2 2)
+        lyrics-table (traverse content 7 2)
+        title (traverse lyrics-table 2 2 2 2)]
         {:year year
          :country country
          :title title}))
