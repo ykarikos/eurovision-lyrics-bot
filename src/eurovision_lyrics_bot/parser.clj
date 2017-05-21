@@ -5,9 +5,9 @@
     (cons '-> (cons content nth-ops))))
 
 (defn- get-lyrics
-  [lyrics-table]
+  [lyrics-table column]
   (->> (drop 3 lyrics-table)
-       (map #(traverse % 2 2))
+       (map #(traverse % column 2))
        (filter #(not= % " "))))
 
 (declare find-element)
@@ -41,7 +41,8 @@
         year (traverse header 2 2 2)
         lyrics-table (find-element html :table :id "lyrics-table")
         title (traverse lyrics-table 2 2 2 2)
-        lyrics (get-lyrics lyrics-table)]
+        languages (->> (traverse lyrics-table 2) (drop 2) count)
+        lyrics (get-lyrics lyrics-table (inc languages))]
       {:year year
        :country country
        :title title
