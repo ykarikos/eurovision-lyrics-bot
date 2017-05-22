@@ -6,7 +6,8 @@
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [clj-tagsoup "0.3.0" :exclusions [org.clojure/clojure]]
                  [clj-http "3.5.0"]
-                 [environ "1.0.0"]]
+                 [environ "1.0.0"]
+                 [twitter-api "1.8.0"]]
   :main ^:skip-aot eurovision-lyrics-bot.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})
