@@ -39,7 +39,7 @@
   (let [header (find-element html :div :class "infohead2")
         country (traverse header 2 4 2)
         year (traverse header 2 2 2)
-        lyrics-table (find-element html :table :id "lyrics-table")
+        lyrics-table (find-element html :table :class "text")
         title (traverse lyrics-table 2 2 2 2)
         languages (->> (traverse lyrics-table 2) (drop 2) count)
         lyrics (get-lyrics lyrics-table (inc languages))]
