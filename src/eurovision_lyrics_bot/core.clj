@@ -6,7 +6,7 @@
             [eurovision-lyrics-bot.tweeter :as tweeter]
             [clj-http.client :as client]))
 
-(defn get-song []
+(defn- get-song []
   (-> (env :url)
     client/get
     :body
@@ -18,4 +18,7 @@
   [& args]
   (let [song (get-song)
         tweet (tweeter/tweet song)]
-    (println tweet)))
+    (println tweet)
+    ; http.async.client hangs, thus this ugly exit. See:
+    ; https://github.com/adamwynne/twitter-api/issues/74
+    (System/exit 0)))
