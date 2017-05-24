@@ -1,36 +1,36 @@
-# eurovision-lyrics-bot
+# Eurovision lyrics Twitter bot
 
-FIXME: description
+A Twitter bot that tweets Eurovision song texts as tweets. It uses http://www.diggiloo.net/ as the source. The bot is run twice a day and tweets with the name [@esc_lyrics_](https://twitter.com/esc_lyrics_).
 
-## Installation
+## Environment variables
 
-Download from http://example.com/FIXME.
+- The source url: `URL`, e.g. `http://www.diggiloo.net/?random`
+- Twitter authentication:
+ - `CONSUMER_KEY`
+ - `CONSUMER_SECRET`
+ - `ACCESS_TOKEN`
+ - `ACCESS_TOKEN_SECRET`
+
 
 ## Usage
 
-FIXME: explanation
+Run either with lein:
+```
+$ lein run
+```
 
-    $ java -jar eurovision-lyrics-bot-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
+Or compile and run:
+```
+$ lein uberjar
+$ java -jar target/uberjar/eurovision-lyrics-bot-1.0.0-standalone.jar
+```
 
 ## License
 
-Copyright © 2017 FIXME
+Copyright (c) 2017 Yrjö Kari-Koskinen <ykk@peruna.fi>
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Eurovision lyrics Twitter bot source code is licensed with the MIT License, see [LICENSE](https://github.com/ykarikos/eurovision-lyrics-bot/blob/master/LICENSE).
+
+## Thanks
+
+This project is a grateful recipient of the [Futurice Open Source sponsorship program](http://futurice.com/blog/sponsoring-free-time-open-source-activities?utm_source=github&utm_medium=spice).
