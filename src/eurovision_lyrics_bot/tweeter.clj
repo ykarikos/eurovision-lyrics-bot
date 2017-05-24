@@ -30,14 +30,17 @@
   ([lyrics tweet]
     (let [new-tweet (str tweet (first lyrics) "\n")
           new-tweet-len (count new-tweet)]
-      (if (> new-tweet-len 140)
+      (if (> new-tweet-len 130)
         tweet
         (get-lyrics (rest lyrics) new-tweet)))))
 
 (defn tweet [song]
-  (let [lyrics (-> song :lyrics get-lyrics)
+  (let [lyrics (-> song :lyrics)
+        random-start (-> lyrics count (- 4) rand-int)
+        random-lyrics (drop random-start lyrics)
+        tweet-lyrics (get-lyrics random-lyrics)
         flag (flags (:country song))
-        tweet (str lyrics
+        tweet (str tweet-lyrics
               (:year song) " "
               flag)]
     (restful/statuses-update
