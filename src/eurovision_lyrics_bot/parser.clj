@@ -4,11 +4,18 @@
   (let [nth-ops (map #(list 'nth %) path)]
     (cons '-> (cons content nth-ops))))
 
+(defn- filter-elements
+  [lyrics-row]
+  (if (vector? lyrics-row)
+    (get lyrics-row 2)
+    lyrics-row))
+
 (defn- get-lyrics
   [lyrics-table column]
   (->> (drop 3 lyrics-table)
        (map #(traverse % column 2))
-       (filter #(not= % " "))))
+       (filter #(not= % " "))
+       (map filter-elements)))
 
 (declare find-element)
 
