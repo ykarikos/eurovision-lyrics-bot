@@ -10,9 +10,18 @@
     (get lyrics-row 2)
     lyrics-row))
 
+(defn- get-lyrics-rows
+  [lyrics-table]
+  (let [rows (drop 3 lyrics-table)
+        row-elem (-> rows first first)]
+    (println row-elem)
+    (if (= :tr row-elem)
+      rows
+      (->> rows first (drop 2)))))
+
 (defn- get-lyrics
   [lyrics-table column]
-  (->> (drop 3 lyrics-table)
+  (->> (get-lyrics-rows lyrics-table)
        (map #(traverse % column 2))
        (filter #(not= % " "))
        (map filter-elements)))
