@@ -14,7 +14,6 @@
   [lyrics-table]
   (let [rows (drop 3 lyrics-table)
         row-elem (-> rows first first)]
-    (println row-elem)
     (if (= :tr row-elem)
       rows
       (->> rows first (drop 2)))))
