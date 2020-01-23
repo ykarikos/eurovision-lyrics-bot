@@ -2,7 +2,8 @@
   (:require [twitter.api.restful :as restful]
             [environ.core :refer [env]]
             [twitter.oauth :as oauth]
-            [clojure.java.io :as io]))
+            [clojure.java.io :as io]
+            [http.async.client :as http]))
 
 (defn- split-flag [f]
   (rest (re-find #"(.+) ([^ *]+)$" f)))
@@ -41,9 +42,11 @@
         tweet-lyrics (get-lyrics random-lyrics)
         flag (flags (:country song))
         tweet (str tweet-lyrics
-              (:year song) " "
-              flag)]
-    (restful/statuses-update
-      :oauth-creds credentials
-      :params {:status tweet})
+                   (:year song) " "
+                   flag)]
+    (with-open [client (http/create-client)]
+      (restful/statuses-update
+        :oauth-creds credentials
+        :client client
+        :params {:status tweet}))
     tweet))

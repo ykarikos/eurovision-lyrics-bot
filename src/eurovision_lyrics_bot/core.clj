@@ -18,7 +18,4 @@
   [& args]
   (let [song (get-song)
         tweet (tweeter/tweet song)]
-    (println tweet)
-    ; http.async.client hangs, thus this ugly exit. See:
-    ; https://github.com/adamwynne/twitter-api/issues/74
-    (System/exit 0)))
+    (println tweet)))
